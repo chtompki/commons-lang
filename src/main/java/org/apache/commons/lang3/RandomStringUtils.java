@@ -33,7 +33,12 @@ import java.util.Random;
  * <a href="https://commons.apache.org/proper/commons-text/javadocs/api-release/org/apache/commons/text/RandomStringGenerator.html">
  * RandomStringGenerator</a> instead.</p>
  *
- * <p>#ThreadSafe#</p>
+ * <p><em>Note.</em> If one uses this class for the purposes of security, we recommend providing your own
+ * instance of {@link Random} for the class to use. For example, {@link java.security.SecureRandom} could
+ * be a good choice.</p>
+ *
+ * <p>#ThreadSafe# by default. If one provides a different instance of {@link Random}, then the thread
+ * safety is inherently bound to the thread safety of the supplied class.</p>
  * @since 1.0
  */
 public class RandomStringUtils {
@@ -43,7 +48,7 @@ public class RandomStringUtils {
      * to the random method so as to not return the same value in the
      * same millisecond.</p>
      */
-    private static final Random RANDOM = new Random();
+    private static Random RANDOM = new Random();
 
     /**
      * <p>{@code RandomStringUtils} instances should NOT be constructed in
@@ -55,6 +60,18 @@ public class RandomStringUtils {
      */
     public RandomStringUtils() {
       super();
+    }
+
+    /**
+     * If for the sake of security purposes {@link Random} is insufficient for random generation,
+     * a user can supply their own instance of {@link Random}.
+     *
+     * @param random is the singleton instance of {@link Random} utilized by the other methods contained
+     *               in this class for the sake of
+     * @since 3.9
+     */
+    public static void useUserSuppliedRandom(final Random random) {
+        RANDOM = random;
     }
 
     // Random
@@ -99,7 +116,15 @@ public class RandomStringUtils {
      * @since 3.5
      */
     public static String randomAscii(final int minLengthInclusive, final int maxLengthExclusive) {
-        return randomAscii(RandomUtils.nextInt(minLengthInclusive, maxLengthExclusive));
+        String returnValue = "";
+        if (RANDOM.getClass().equals(Random.class)) {
+            returnValue = randomAscii(RandomUtils.nextInt(minLengthInclusive, maxLengthExclusive));
+        } else {
+            RandomUtils.useUserSuppliedRandom(RANDOM);
+            returnValue = randomAscii(RandomUtils.nextInt(minLengthInclusive, maxLengthExclusive));
+            RandomUtils.useUserSuppliedRandom(new Random());
+        }
+        return returnValue;
     }
 
     /**
@@ -128,7 +153,15 @@ public class RandomStringUtils {
      * @since 3.5
      */
     public static String randomAlphabetic(final int minLengthInclusive, final int maxLengthExclusive) {
-        return randomAlphabetic(RandomUtils.nextInt(minLengthInclusive, maxLengthExclusive));
+        String returnValue = "";
+        if (RANDOM.getClass().equals(Random.class)) {
+            returnValue = randomAlphabetic(RandomUtils.nextInt(minLengthInclusive, maxLengthExclusive));
+        } else {
+            RandomUtils.useUserSuppliedRandom(RANDOM);
+            returnValue = randomAlphabetic(RandomUtils.nextInt(minLengthInclusive, maxLengthExclusive));
+            RandomUtils.useUserSuppliedRandom(new Random());
+        }
+        return returnValue;
     }
 
     /**
@@ -158,7 +191,15 @@ public class RandomStringUtils {
      * @since 3.5
      */
     public static String randomAlphanumeric(final int minLengthInclusive, final int maxLengthExclusive) {
-        return randomAlphanumeric(RandomUtils.nextInt(minLengthInclusive, maxLengthExclusive));
+        String returnValue = "";
+        if (RANDOM.getClass().equals(Random.class)) {
+            returnValue = randomAlphanumeric(RandomUtils.nextInt(minLengthInclusive, maxLengthExclusive));
+        } else {
+            RandomUtils.useUserSuppliedRandom(RANDOM);
+            returnValue = randomAlphanumeric(RandomUtils.nextInt(minLengthInclusive, maxLengthExclusive));
+            RandomUtils.useUserSuppliedRandom(new Random());
+        }
+        return returnValue;
     }
 
     /**
@@ -188,7 +229,15 @@ public class RandomStringUtils {
      * @since 3.5
      */
     public static String randomGraph(final int minLengthInclusive, final int maxLengthExclusive) {
-        return randomGraph(RandomUtils.nextInt(minLengthInclusive, maxLengthExclusive));
+        String returnValue = "";
+        if (RANDOM.getClass().equals(Random.class)) {
+            returnValue = randomGraph(RandomUtils.nextInt(minLengthInclusive, maxLengthExclusive));
+        } else {
+            RandomUtils.useUserSuppliedRandom(RANDOM);
+            returnValue = randomGraph(RandomUtils.nextInt(minLengthInclusive, maxLengthExclusive));
+            RandomUtils.useUserSuppliedRandom(new Random());
+        }
+        return returnValue;
     }
 
     /**
@@ -217,7 +266,15 @@ public class RandomStringUtils {
      * @since 3.5
      */
     public static String randomNumeric(final int minLengthInclusive, final int maxLengthExclusive) {
-        return randomNumeric(RandomUtils.nextInt(minLengthInclusive, maxLengthExclusive));
+        String returnValue = "";
+        if (RANDOM.getClass().equals(Random.class)) {
+            returnValue = randomNumeric(RandomUtils.nextInt(minLengthInclusive, maxLengthExclusive));
+        } else {
+            RandomUtils.useUserSuppliedRandom(RANDOM);
+            returnValue = randomNumeric(RandomUtils.nextInt(minLengthInclusive, maxLengthExclusive));
+            RandomUtils.useUserSuppliedRandom(new Random());
+        }
+        return returnValue;
     }
 
     /**
@@ -247,7 +304,15 @@ public class RandomStringUtils {
      * @since 3.5
      */
     public static String randomPrint(final int minLengthInclusive, final int maxLengthExclusive) {
-        return randomPrint(RandomUtils.nextInt(minLengthInclusive, maxLengthExclusive));
+        String returnValue = "";
+        if (RANDOM.getClass().equals(Random.class)) {
+            returnValue = randomPrint(RandomUtils.nextInt(minLengthInclusive, maxLengthExclusive));
+        } else {
+            RandomUtils.useUserSuppliedRandom(RANDOM);
+            returnValue = randomPrint(RandomUtils.nextInt(minLengthInclusive, maxLengthExclusive));
+            RandomUtils.useUserSuppliedRandom(new Random());
+        }
+        return returnValue;
     }
 
     /**

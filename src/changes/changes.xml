@@ -46,6 +46,7 @@ The <action> type attribute can be add,update,fix,remove.
   <body>
 
   <release version="3.9" date="????-??-??" description="??">
+    <action issue="LANG-1441" type="update" dev="chtompki">Accommodate for user supplied instance of Random in RandomUtils and RandomStringUtils</action>
     <action type="add" dev="jochen">Adding the Functions class.</action>
     <action issue="LANG-1416" type="update" dev="britter">Update to JUnit 5</action>
     <action issue="LANG-1417" type="update" dev="britter">Add @FunctionalInterface to ThreadPredicate and ThreadGroupPredicate</action>

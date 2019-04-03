@@ -21,6 +21,10 @@ import java.util.Random;
 /**
  * <p>Utility library that supplements the standard {@link Random} class.</p>
  *
+ * <p><em>Note.</em> If one uses this class for the purposes of security, we recommend providing your own
+ * instance of {@link Random} for the class to use. For example, {@link java.security.SecureRandom} could
+ * be a good choice.</p>
+ *
  * @since 3.3
  */
 public class RandomUtils {
@@ -29,7 +33,7 @@ public class RandomUtils {
      * Random object used by random method. This has to be not local to the
      * random method so as to not return the same value in the same millisecond.
      */
-    private static final Random RANDOM = new Random();
+    private static Random RANDOM = new Random();
 
     /**
      * <p>
@@ -45,6 +49,18 @@ public class RandomUtils {
      */
     public RandomUtils() {
         super();
+    }
+
+    /**
+     * If for the sake of security purposes {@link Random} is insufficient for random generation,
+     * a user can supply their own instance of {@link Random}.
+     *
+     * @param random is the singleton instance of {@link Random} utilized by the other methods contained
+     *               in this class for the sake of
+     * @since 3.9
+     */
+    public static void useUserSuppliedRandom(final Random random) {
+        RANDOM = random;
     }
 
     /**

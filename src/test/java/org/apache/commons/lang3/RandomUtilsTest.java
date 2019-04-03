@@ -27,6 +27,8 @@ import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Modifier;
+import java.security.SecureRandom;
+import java.util.Random;
 
 /**
  * Tests for {@link RandomUtils}
@@ -134,6 +136,18 @@ public class RandomUtilsTest {
     public void testNextInt() {
         final int result = RandomUtils.nextInt(33, 42);
         assertTrue(result >= 33 && result < 42);
+    }
+
+    /**
+     * Tests next int range, with {@link SecureRandom}.
+     */
+    @Test
+    public void testNextIntSecureRandom() {
+        RandomUtils.useUserSuppliedRandom(new SecureRandom());
+        final int result = RandomUtils.nextInt(33, 42);
+        assertTrue(result >= 33 && result < 42);
+        //Set back to java.util.Random
+        RandomUtils.useUserSuppliedRandom(new Random());
     }
 
     /**
