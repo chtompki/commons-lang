@@ -253,15 +253,15 @@ public class StringUtils {
      * @since 3.2
      */
     public static boolean isAnyEmpty(final CharSequence... css) {
-      if (ArrayUtils.isEmpty(css)) {
-        return false;
-      }
-      for (final CharSequence cs : css) {
-        if (isEmpty(cs)) {
-          return true;
+        if (ArrayUtils.isEmpty(css)) {
+            return false;
         }
-      }
-      return false;
+        for (final CharSequence cs : css) {
+            if (isEmpty(cs)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -285,7 +285,7 @@ public class StringUtils {
      * @since 3.2
      */
     public static boolean isNoneEmpty(final CharSequence... css) {
-      return !isAnyEmpty(css);
+        return !isAnyEmpty(css);
     }
 
     /**
@@ -397,15 +397,15 @@ public class StringUtils {
      * @since 3.2
      */
     public static boolean isAnyBlank(final CharSequence... css) {
-      if (ArrayUtils.isEmpty(css)) {
-        return false;
-      }
-      for (final CharSequence cs : css) {
-        if (isBlank(cs)) {
-          return true;
+        if (ArrayUtils.isEmpty(css)) {
+            return false;
         }
-      }
-      return false;
+        for (final CharSequence cs : css) {
+            if (isBlank(cs)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -432,7 +432,7 @@ public class StringUtils {
      * @since 3.2
      */
     public static boolean isNoneBlank(final CharSequence... css) {
-      return !isAnyBlank(css);
+        return !isAnyBlank(css);
     }
 
     /**
@@ -462,7 +462,7 @@ public class StringUtils {
         }
         for (final CharSequence cs : css) {
             if (isNotBlank(cs)) {
-               return false;
+                return false;
             }
         }
         return true;
@@ -5509,32 +5509,32 @@ public class StringUtils {
     }
 
     /**
-    * <p>Case insensitively replaces all occurrences of a String within another String.</p>
-    *
-    * <p>A {@code null} reference passed to this method is a no-op.</p>
-    *
-    * <pre>
-    * StringUtils.replaceIgnoreCase(null, *, *)        = null
-    * StringUtils.replaceIgnoreCase("", *, *)          = ""
-    * StringUtils.replaceIgnoreCase("any", null, *)    = "any"
-    * StringUtils.replaceIgnoreCase("any", *, null)    = "any"
-    * StringUtils.replaceIgnoreCase("any", "", *)      = "any"
-    * StringUtils.replaceIgnoreCase("aba", "a", null)  = "aba"
-    * StringUtils.replaceIgnoreCase("abA", "A", "")    = "b"
-    * StringUtils.replaceIgnoreCase("aba", "A", "z")   = "zbz"
-    * </pre>
-    *
-    * @see #replaceIgnoreCase(String text, String searchString, String replacement, int max)
-    * @param text  text to search and replace in, may be null
-    * @param searchString  the String to search for (case insensitive), may be null
-    * @param replacement  the String to replace it with, may be null
-    * @return the text with any replacements processed,
-    *  {@code null} if null String input
-    * @since 3.5
-    */
-   public static String replaceIgnoreCase(final String text, final String searchString, final String replacement) {
-       return replaceIgnoreCase(text, searchString, replacement, -1);
-   }
+     * <p>Case insensitively replaces all occurrences of a String within another String.</p>
+     *
+     * <p>A {@code null} reference passed to this method is a no-op.</p>
+     *
+     * <pre>
+     * StringUtils.replaceIgnoreCase(null, *, *)        = null
+     * StringUtils.replaceIgnoreCase("", *, *)          = ""
+     * StringUtils.replaceIgnoreCase("any", null, *)    = "any"
+     * StringUtils.replaceIgnoreCase("any", *, null)    = "any"
+     * StringUtils.replaceIgnoreCase("any", "", *)      = "any"
+     * StringUtils.replaceIgnoreCase("aba", "a", null)  = "aba"
+     * StringUtils.replaceIgnoreCase("abA", "A", "")    = "b"
+     * StringUtils.replaceIgnoreCase("aba", "A", "z")   = "zbz"
+     * </pre>
+     *
+     * @see #replaceIgnoreCase(String text, String searchString, String replacement, int max)
+     * @param text  text to search and replace in, may be null
+     * @param searchString  the String to search for (case insensitive), may be null
+     * @param replacement  the String to replace it with, may be null
+     * @return the text with any replacements processed,
+     *  {@code null} if null String input
+     * @since 3.5
+     */
+    public static String replaceIgnoreCase(final String text, final String searchString, final String replacement) {
+        return replaceIgnoreCase(text, searchString, replacement, -1);
+    }
 
     /**
      * <p>Replaces a String with another String inside a larger String,
@@ -5599,36 +5599,36 @@ public class StringUtils {
      * @return the text with any replacements processed,
      *  {@code null} if null String input
      */
-     private static String replace(final String text, String searchString, final String replacement, int max, final boolean ignoreCase) {
-         if (isEmpty(text) || isEmpty(searchString) || replacement == null || max == 0) {
-             return text;
-         }
-         String searchText = text;
-         if (ignoreCase) {
-             searchText = text.toLowerCase();
-             searchString = searchString.toLowerCase();
-         }
-         int start = 0;
-         int end = searchText.indexOf(searchString, start);
-         if (end == INDEX_NOT_FOUND) {
-             return text;
-         }
-         final int replLength = searchString.length();
-         int increase = replacement.length() - replLength;
-         increase = increase < 0 ? 0 : increase;
-         increase *= max < 0 ? 16 : max > 64 ? 64 : max;
-         final StringBuilder buf = new StringBuilder(text.length() + increase);
-         while (end != INDEX_NOT_FOUND) {
-             buf.append(text, start, end).append(replacement);
-             start = end + replLength;
-             if (--max == 0) {
-                 break;
-             }
-             end = searchText.indexOf(searchString, start);
-         }
-         buf.append(text, start, text.length());
-         return buf.toString();
-     }
+    private static String replace(final String text, String searchString, final String replacement, int max, final boolean ignoreCase) {
+        if (isEmpty(text) || isEmpty(searchString) || replacement == null || max == 0) {
+            return text;
+        }
+        String searchText = text;
+        if (ignoreCase) {
+            searchText = text.toLowerCase();
+            searchString = searchString.toLowerCase();
+        }
+        int start = 0;
+        int end = searchText.indexOf(searchString, start);
+        if (end == INDEX_NOT_FOUND) {
+            return text;
+        }
+        final int replLength = searchString.length();
+        int increase = replacement.length() - replLength;
+        increase = increase < 0 ? 0 : increase;
+        increase *= max < 0 ? 16 : max > 64 ? 64 : max;
+        final StringBuilder buf = new StringBuilder(text.length() + increase);
+        while (end != INDEX_NOT_FOUND) {
+            buf.append(text, start, end).append(replacement);
+            start = end + replLength;
+            if (--max == 0) {
+                break;
+            }
+            end = searchText.indexOf(searchString, start);
+        }
+        buf.append(text, start, text.length());
+        return buf.toString();
+    }
 
     /**
      * <p>Case insensitively replaces a String with another String inside a larger String,
@@ -5819,7 +5819,7 @@ public class StringUtils {
         // if recursing, this shouldn't be less than 0
         if (timeToLive < 0) {
             throw new IllegalStateException("Aborting to protect against StackOverflowError - " +
-                                            "output of one loop is the input of another");
+                    "output of one loop is the input of another");
         }
 
         final int searchLength = searchList.length;
@@ -5828,9 +5828,9 @@ public class StringUtils {
         // make sure lengths are ok, these need to be equal
         if (searchLength != replacementLength) {
             throw new IllegalArgumentException("Search and Replace array lengths don't match: "
-                + searchLength
-                + " vs "
-                + replacementLength);
+                    + searchLength
+                    + " vs "
+                    + replacementLength);
         }
 
         // keep track of which still have matches
@@ -6084,8 +6084,8 @@ public class StringUtils {
             end = temp;
         }
         return str.substring(0, start) +
-            overlay +
-            str.substring(end);
+                overlay +
+                str.substring(end);
     }
 
     // Chomping
@@ -6829,7 +6829,7 @@ public class StringUtils {
             final int codepoint = str.codePointAt(inOffset);
             newCodePoints[outOffset++] = codepoint; // copy the remaining ones
             inOffset += Character.charCount(codepoint);
-         }
+        }
         return new String(newCodePoints, 0, outOffset);
     }
 
@@ -6874,7 +6874,7 @@ public class StringUtils {
             final int codepoint = str.codePointAt(inOffset);
             newCodePoints[outOffset++] = codepoint; // copy the remaining ones
             inOffset += Character.charCount(codepoint);
-         }
+        }
         return new String(newCodePoints, 0, outOffset);
     }
 
@@ -6927,7 +6927,7 @@ public class StringUtils {
             }
             newCodePoints[outOffset++] = newCodePoint;
             i += Character.charCount(newCodePoint);
-         }
+        }
         return new String(newCodePoints, 0, outOffset);
     }
 
@@ -7934,8 +7934,8 @@ public class StringUtils {
         final int endOffset = str.length()-targetSting/2;
 
         return str.substring(0, startOffset) +
-            middle +
-            str.substring(endOffset);
+                middle +
+                str.substring(endOffset);
     }
 
     // Difference
