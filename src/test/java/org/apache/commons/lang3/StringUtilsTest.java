@@ -2687,6 +2687,18 @@ public class StringUtilsTest {
 
         // StringUtils.removeIgnoreCase("queued", "zZ") = "queued"
         assertEquals("queued", StringUtils.removeIgnoreCase("queued", "zZ"));
+
+        // StringUtils.removeIgnoreCase("?a", "a") = "?"
+        assertEquals("\u0130", StringUtils.removeIgnoreCase("\u0130a", "a"));
+
+        // StringUtils.removeIgnoreCase("?a", "a") = "?"
+//        assertEquals("\uFB01", StringUtils.removeIgnoreCase("\uFB01a", "a"));
+//        System.out.println("\uFB01 " + "\uFB01".toUpperCase());
+    }
+
+    @Test
+    public void temp() {
+        System.out.println("\u0130a".toLowerCase().substring(1,2));
     }
 
     @Test

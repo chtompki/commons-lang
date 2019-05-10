@@ -5605,8 +5605,17 @@ public class StringUtils {
          }
          String searchText = text;
          if (ignoreCase) {
-             searchText = text.toLowerCase();
-             searchString = searchString.toLowerCase();
+
+//             searchText = text.toLowerCase();
+//             if (searchText.indexOf(searchString.toLowerCase(), 0) > text.length()) {
+//                 searchText = text.toUpperCase();
+//                 searchString = searchString.toUpperCase();
+//             } else {
+                 searchText = text.toLowerCase();
+                 searchString = searchString.toLowerCase();
+//                 searchText = text.toUpperCase();
+//                 searchString = searchString.toUpperCase();
+//             }
          }
          int start = 0;
          int end = searchText.indexOf(searchString, start);
